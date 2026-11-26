@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coral Skylark — Coastal Ring Run</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="gl"></canvas>
+<canvas id="panel"></canvas>
+
+<div id="hud" class="hidden">
+  <div id="hud-left">
+    <div class="hud-row"><span class="hud-label">ALT</span><span id="hud-alt">0</span><span class="hud-unit">ft</span></div>
+    <div class="hud-row"><span class="hud-label">SPD</span><span id="hud-spd">0</span><span class="hud-unit">kt</span></div>
+    <div class="hud-row"><span class="hud-label">HDG</span><span id="hud-hdg">000</span><span class="hud-unit">deg</span></div>
+  </div>
+  <div id="hud-right">
+    <div class="hud-row"><span class="hud-label">SCORE</span><span id="hud-score">0</span></div>
+    <div class="hud-row"><span class="hud-label">RINGS</span><span id="hud-rings">0/10</span></div>
+    <div class="hud-row"><span class="hud-label">TIME</span><span id="hud-time">5:00</span></div>
+    <div class="hud-row"><span class="hud-label">FUEL</span><span id="fuel-bar"><span id="fuel-fill"></span></span></div>
+  </div>
+  <div id="ring-guide">
+    <div id="ring-arrow">&#10148;</div>
+    <div id="ring-dist">RING 1 &middot; 0 m</div>
+  </div>
+  <div id="hud-message"></div>
+  <div id="hud-warn"></div>
+</div>
+
+<div id="title-screen">
+  <h1 id="game-title">CORAL SKYLARK</h1>
+  <p id="game-sub">Coastal Ring Run &middot; Kestrel Bay</p>
+  <p id="mission-brief">Fly the ten glowing rings around Kestrel Bay, mind your fuel,<br>
+  then bring her home to the runway strip. A clean landing pays 500.</p>
+  <div id="controls-table">
+    <div><b>&uarr; &darr;</b> pitch</div><div><b>&larr; &rarr;</b> bank &amp; turn</div>
+    <div><b>W / S</b> throttle up / down</div><div><b>A / D</b> rudder</div>
+    <div><b>C</b> chase / cockpit camera</div><div><b>Mouse</b> steer toward cursor</div>
+    <div><b>P</b> pause</div><div><b>M</b> mute</div>
+  </div>
+  <p id="start-prompt">Press ENTER or click to take off</p>
+</div>
+
+<div id="pause-screen" class="hidden">
+  <h2>PAUSED</h2>
+  <p>Press P to keep flying</p>
+</div>
+
+<div id="end-screen" class="hidden">
+  <h2 id="end-title">SORTIE COMPLETE</h2>
+  <table id="end-table">
+    <tr><td>Rings flown</td><td id="end-rings">0 / 10</td></tr>
+    <tr><td>Ring points</td><td id="end-ring-points">0</td></tr>
+    <tr><td>Landing bonus</td><td id="end-landing">0</td></tr>
+    <tr><td>Fuel remaining</td><td id="end-fuel">0%</td></tr>
+    <tr><td>Hull</td><td id="end-hull">100%</td></tr>
+    <tr class="total"><td>FINAL SCORE</td><td id="end-score">0</td></tr>
+  </table>
+  <p id="end-note"></p>
+  <p id="restart-prompt">Press ENTER to fly again</p>
+</div>
+
+<script type="module" src="src/main.js"></script>
+</body>
+</html>

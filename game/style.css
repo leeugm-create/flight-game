@@ -1,0 +1,59 @@
+/* Coral Skylark — page and HUD styling. All presentation lives here; the
+   canvases stack full-window: WebGL world below, 2D instrument panel above. */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100%; overflow: hidden; background: #0b1c26; }
+body { font-family: "Avenir Next", "Segoe UI", Verdana, sans-serif; color: #eaf6ff; }
+canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+#gl { z-index: 0; }
+#panel { z-index: 2; pointer-events: none; }
+.hidden { display: none !important; }
+
+#hud { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+#hud-left { position: absolute; top: 18px; left: 20px; background: rgba(6, 24, 34, .55);
+  border: 1px solid rgba(140, 220, 255, .45); border-radius: 10px; padding: 10px 14px; }
+#hud-right { position: absolute; top: 18px; right: 20px; text-align: right; background: rgba(6, 24, 34, .55);
+  border: 1px solid rgba(140, 220, 255, .45); border-radius: 10px; padding: 10px 14px; }
+.hud-row { font-size: 22px; font-weight: 700; letter-spacing: 1px; line-height: 1.35;
+  font-variant-numeric: tabular-nums; text-shadow: 0 1px 3px rgba(0,0,0,.6); }
+.hud-label { color: #8cdcff; font-size: 13px; margin-right: 8px; vertical-align: 3px; }
+.hud-unit { color: #9fb8c4; font-size: 13px; margin-left: 5px; }
+#fuel-bar { display: inline-block; width: 110px; height: 12px; border: 1px solid #8cdcff;
+  border-radius: 6px; vertical-align: -1px; overflow: hidden; background: rgba(0,0,0,.4); }
+#fuel-fill { display: block; height: 100%; width: 100%; background: #57e6a3; }
+#fuel-fill.low { background: #ffb347; }
+#fuel-fill.critical { background: #ff5d5d; }
+
+#ring-guide { position: absolute; top: 84px; left: 50%; transform: translateX(-50%); text-align: center; }
+#ring-arrow { font-size: 34px; color: #ffd75e; text-shadow: 0 0 12px rgba(255, 190, 40, .9); display: inline-block; }
+#ring-dist { font-size: 15px; font-weight: 700; letter-spacing: 2px; color: #ffe9a8;
+  text-shadow: 0 1px 4px rgba(0,0,0,.8); margin-top: 2px; }
+#hud-message { position: absolute; top: 34%; left: 50%; transform: translateX(-50%);
+  font-size: 40px; font-weight: 800; letter-spacing: 3px; color: #ffe9a8; opacity: 0;
+  text-shadow: 0 2px 14px rgba(0,0,0,.75); transition: opacity .25s; white-space: nowrap; }
+#hud-message.show { opacity: 1; }
+#hud-warn { position: absolute; bottom: 120px; left: 50%; transform: translateX(-50%);
+  font-size: 19px; font-weight: 800; letter-spacing: 3px; color: #ff7b6b;
+  text-shadow: 0 1px 6px rgba(0,0,0,.8); }
+
+#title-screen, #pause-screen, #end-screen { position: absolute; z-index: 4; text-align: center; }
+#title-screen { top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(5, 20, 30, .72);
+  border: 1px solid rgba(140, 220, 255, .5); border-radius: 16px; padding: 34px 52px; }
+#game-title { font-size: 52px; letter-spacing: 6px; color: #ffb199; text-shadow: 0 3px 18px rgba(255, 90, 60, .45); }
+#game-sub { font-size: 17px; letter-spacing: 4px; color: #8cdcff; margin: 6px 0 16px; }
+#mission-brief { font-size: 16px; line-height: 1.55; color: #dceef7; }
+#controls-table { display: grid; grid-template-columns: 1fr 1fr; gap: 5px 26px; margin: 20px auto 6px;
+  font-size: 14.5px; text-align: left; max-width: 520px; color: #b9d4e0; }
+#controls-table b { color: #ffe9a8; }
+#start-prompt { margin-top: 16px; font-size: 18px; font-weight: 700; letter-spacing: 2px; color: #57e6a3; }
+#pause-screen { top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(5, 20, 30, .7);
+  border-radius: 14px; padding: 26px 46px; }
+#pause-screen h2 { font-size: 36px; letter-spacing: 5px; }
+#end-screen { top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(5, 20, 30, .78);
+  border: 1px solid rgba(140, 220, 255, .5); border-radius: 16px; padding: 30px 48px; min-width: 430px; }
+#end-screen h2 { font-size: 34px; letter-spacing: 4px; color: #ffe9a8; margin-bottom: 16px; }
+#end-table { margin: 0 auto; border-collapse: collapse; font-size: 18px; }
+#end-table td { padding: 5px 18px; text-align: left; }
+#end-table td:last-child { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
+#end-table tr.total td { border-top: 2px solid #8cdcff; font-size: 22px; color: #57e6a3; padding-top: 10px; }
+#end-note { margin-top: 14px; font-size: 15.5px; color: #b9d4e0; }
+#restart-prompt { margin-top: 10px; font-size: 16px; font-weight: 700; letter-spacing: 2px; color: #57e6a3; }
